@@ -1,7 +1,7 @@
 
-int greenPin = 2; 
-int redPin = 5;
-int bluePin = 4;
+int greenPin = 5; 
+int redPin = 4;
+int bluePin = 2;
 
 void setup() {
   // put your setup code here, to run once:
@@ -9,30 +9,37 @@ void setup() {
   pinMode(redPin, OUTPUT);
   pinMode(greenPin, OUTPUT);
   pinMode(bluePin, OUTPUT);
+
+
+  /*
+   * range for PWM cycle is 0-255
+   * 0% = 0
+   * 50% = 127
+   */
+  analogWriteRange(255); 
   
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-
-  digitalWrite(bluePin, LOW);
-  digitalWrite(greenPin, LOW);
-  digitalWrite(redPin, HIGH);
-  delay(1000);
-  digitalWrite(bluePin, HIGH);
+  // 0 = LED with full brightness
   digitalWrite(greenPin, HIGH);
+  digitalWrite(bluePin, HIGH); 
+  digitalWrite(redPin, HIGH);
+
   
-  digitalWrite(redPin, LOW);
-  digitalWrite(bluePin, LOW);
-  digitalWrite(greenPin, HIGH);
-  delay(1000);
-  digitalWrite(redPin, HIGH);
-  digitalWrite(bluePin, HIGH);
+  for (int i = 255; i >= 0; i--) {
+    analogWrite(greenPin, 255 - i);
+    analogWrite(redPin, 255 - 3 * i);
+    delay(20);
+  }
 
-  digitalWrite(greenPin, LOW);
-  digitalWrite(redPin, LOW);
-  digitalWrite(bluePin, HIGH);
   delay(1000);
-  digitalWrite(greenPin, HIGH);
-  digitalWrite(redPin, HIGH);
+
+  for (int j = 255; j >= 0; j--) {
+    analogWrite(bluePin, 255 - j);
+    analogWrite(greenPin, 255 - j);
+    delay(20);
+  }
+  
 }
