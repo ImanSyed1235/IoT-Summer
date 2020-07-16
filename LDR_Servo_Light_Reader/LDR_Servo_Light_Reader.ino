@@ -23,8 +23,8 @@ void loop() {
   // put your main code here, to run repeatedly:
   analogValue = analogRead(ldrPin);
   Serial.println(analogValue);
-  analogValue = map(analogValue, 50, 200, 0, 180);
+  analogValue = map(analogValue, 0, 200, 0, 180);
   miniServo.write(analogValue);
-  delay(1000);
+  delay(100);
   
 }
